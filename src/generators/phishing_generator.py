@@ -61,9 +61,6 @@ class PhishingGenerator:
         if 'phishing_signs' not in profile:
             raise ValueError('phishing_signs is required')
 
-        if 'risk_level' not in profile:
-            raise ValueError('risk_level is required')
-
         # Validate phishing signs - can be list or dict with difficulty levels
         phishing_signs = profile['phishing_signs']
 
@@ -145,12 +142,18 @@ class PhishingGenerator:
     def create_default_profile(
         self,
         signs: Optional[List[str]] = None,
-        risk_level: str = 'medium',
         target_info: str = 'General employee',
         use_difficulty_levels: bool = False,
         default_difficulty: str = 'medium'
     ) -> Dict[str, Any]:
-        """Create a default phishing profile."""
+        """Create a default phishing profile.
+
+        Args:
+            signs: List of phishing signs to include
+            target_info: Context about the target
+            use_difficulty_levels: If True, returns dict format with difficulty levels
+            default_difficulty: Default difficulty level when use_difficulty_levels=True
+        """
         if signs is None or len(signs) == 0:
             signs = ['urgency', 'generic_greeting']
 
@@ -163,7 +166,6 @@ class PhishingGenerator:
 
         return {
             'phishing_signs': phishing_signs,
-            'risk_level': risk_level,
             'target_info': target_info
         }
 

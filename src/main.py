@@ -31,17 +31,11 @@ def cli():
     default='urgency,generic_greeting'
 )
 @click.option(
-    '--risk', '-r',
-    type=click.Choice(['low', 'medium', 'high']),
-    default='medium',
-    help='Risk level (low, medium, high)'
-)
-@click.option(
     '--target', '-t',
     default='General employee',
     help='Target information/context'
 )
-def generate(signs, risk, target):
+def generate(signs, target):
     """Generate phishing email content."""
     try:
         # Validate configuration
@@ -54,13 +48,11 @@ def generate(signs, risk, target):
 
         profile = {
             'phishing_signs': phishing_signs,
-            'risk_level': risk,
             'target_info': target
         }
 
         click.echo(f"{Fore.BLUE}[GENERATING] Phishing email...{Style.RESET_ALL}")
         click.echo(f"{Fore.WHITE}Signs: {', '.join(phishing_signs)}{Style.RESET_ALL}")
-        click.echo(f"{Fore.WHITE}Risk Level: {risk}{Style.RESET_ALL}")
         click.echo(f"{Fore.WHITE}Target: {target}{Style.RESET_ALL}")
         click.echo()
 

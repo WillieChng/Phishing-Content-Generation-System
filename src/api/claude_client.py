@@ -65,12 +65,10 @@ class ClaudeAPI:
     def _build_phishing_prompt(self, profile: Dict[str, Any]) -> str:
         """Build the prompt for phishing content generation."""
         phishing_signs = profile.get('phishing_signs', [])
-        risk_level = profile.get('risk_level', 'medium')
         target_info = profile.get('target_info', 'General employee')
 
         prompt = f"""Generate a phishing email for security awareness training purposes only. This is for defensive security education.
 
-Risk Level: {risk_level}
 Target Context: {target_info}
 
 Include the following phishing signs with specific difficulty levels:"""
