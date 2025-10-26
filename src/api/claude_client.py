@@ -66,12 +66,17 @@ class ClaudeAPI:
         """Build the prompt for phishing content generation."""
         phishing_signs = profile.get('phishing_signs', [])
         target_info = profile.get('target_info', 'General employee')
+        scenario_description = profile.get('scenario_description', '')
 
         prompt = f"""Generate a phishing email for security awareness training purposes only. This is for defensive security education.
 
-Target Context: {target_info}
+Target Context: {target_info}"""
 
-Include the following phishing signs with specific difficulty levels:"""
+        # Add scenario description if provided
+        if scenario_description:
+            prompt += f"\nScenario Theme: {scenario_description}"
+
+        prompt += "\n\nInclude the following phishing signs with specific difficulty levels:"
 
         # Handle both legacy list format and new dict format
         if isinstance(phishing_signs, dict):
